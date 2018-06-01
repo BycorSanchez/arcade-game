@@ -1,27 +1,23 @@
-// Map constrains
-let map = {width: 400, heigth: 380, stepX: 101, stepY: 85};
-let streets = [40, 125, 210];
-
-const random = function(from, to){
-    return Math.floor(Math.random() * to) + from;
-}
-
 class Enemy {
     constructor() {
         this.sprite = 'images/enemy-bug.png';
         this.reset();
     }
+
+    // Set a random speed and street line
     reset() {
         this.x = -100;
         this.y = streets[random(0, 3)];
         this.speed = random(120, 600);
     }
+
     // Checks whether the enemy collides with the player
     collidePlayer() {
         const xDifference = Math.abs(this.x - player.x);
         const yDifference = Math.abs(this.y - player.y);
         return yDifference < 40 && xDifference < 40;
     }
+
     // Update the enemy's position
     // Parameter: dt, a time delta between ticks
     update(dt) {
@@ -35,12 +31,12 @@ class Enemy {
             this.reset();
         }
     }
+
     // Draw the enemy on the screen
     render() {
         ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
     }
 }
-
 
 class Player {
     constructor() {
@@ -62,11 +58,6 @@ class Player {
         if (this.y > map.heigth) this.y = map.heigth;
     }
 
-    // Draw player on screen
-    render() {
-        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    }
-
     // Control player movement
     handleInput(key) {
         switch (key) {
@@ -83,23 +74,38 @@ class Player {
                 this.y += map.stepY;
                 break;
         }
+
+        // Check if player reached the water
         if (this.y <= 0) {
             alert('Congratulations, you\'ve crossed the road!!');
             this.reset();
         }
     }
+
+    // Draw player on screen
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
 }
+
+const random = function(from, to){
+    return Math.floor(Math.random() * to) + from;
+}
+
+// Map constrains
+const map = {width: 400, heigth: 380, stepX: 101, stepY: 85};
+const streets = [40, 125, 210];
 
 
 // Create enemies
-let allEnemies = [new Enemy(), new Enemy(), new Enemy()];
+const allEnemies = [new Enemy(), new Enemy(), new Enemy()];
 
 // Create new player
-let player = new Player();
+const player = new Player();
 
 // Listen for key presses and and sendit to player's handleInput() method
 document.addEventListener('keyup', function(e) {
-    var allowedKeys = {
+    const allowedKeys = {
         37: 'left',
         38: 'up',
         39: 'right',
