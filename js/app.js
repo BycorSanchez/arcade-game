@@ -1,16 +1,43 @@
-let Enemy = function(x, y, speed) {
-    this.x = x;
-    this.y = y;
-    this.speed = speed;
+// Map constrains
+let streets = [40, 125, 210];
+let map = { width: 400, heigth: 380, stepX: 101, stepY: 85};
+
+const random = function(from, to){
+    return Math.floor(Math.random() * to) + from;
+}
+
+let Enemy = function(x, y) {
     this.sprite = 'images/enemy-bug.png';
+    this.reset();
 };
 
-// Update the enemy's position, required method for game
+Enemy.prototype.reset = function(){
+    this.x = -100;
+    this.y = streets[random(0, 3)];
+    this.speed = random(120, 600);
+};
+
+// Checks whether the enemy collides with the player
+Enemy.prototype.collidePlayer = function(){
+    const xDifference = Math.abs(this.x - player.x);
+    const yDifference = Math.abs(this.y - player.y);
+    return yDifference < 40 && xDifference < 40;
+};
+
+// Update the enemy's position
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
+    this.x += this.speed * dt;
+
+    // Check if collides with a player
+    if (this.collidePlayer()) {
+        player.reset();
+    }
+
+    // Reset to starting position once it disappears
+    if (this.x > map.width + 100){
+        this.reset();
+    }
 };
 
 // Draw the enemy on the screen
@@ -20,17 +47,22 @@ Enemy.prototype.render = function() {
 
 
 let Player = function(x, y){
-    this.x = x;
-    this.y = y;
     this.sprite = 'images/char-boy.png';
+    this.reset();
 }
 
-Player.prototype.update = function(dt){
-    // User canvas constrains
+// Place player at starting position (centered at bottom)
+Player.prototype.reset = function(){
+    this.x = map.width/2;
+    this.y = map.heigth;
+};
+
+Player.prototype.update = function(){
+    // Do not allow user to move beyond map constraints
     if (this.x < 0) this.x = 0;
     if (this.y < 0) this.y = 0;
-    if (this.x > 400) this.x = 400;
-    if (this.y > 380) this.y = 380;
+    if (this.x > map.width) this.x = map.width;
+    if (this.y > map.heigth) this.y = map.heigth;
 };
 
 // Draw player on screen
@@ -42,25 +74,29 @@ Player.prototype.render = function(){
 Player.prototype.handleInput = function(key){
     switch(key){
         case 'left':
-            this.x -= 101;
+            this.x -= map.stepX;
             break;
         case 'right':
-            this.x += 101;
+            this.x += map.stepX;
             break;
         case 'up':
-            this.y -= 85;
+            this.y -= map.stepY;
             break;
         case 'down':
-            this.y += 85;
+            this.y += map.stepY;
             break;
+    }
+    if (this.y <= 0){
+        alert('Congratulations, you\'ve cross the road!!');
+        this.reset();
     }
 };
 
-// Enemies
-let allEnemies = [new Enemy(), new Enemy(), new Enemy(), new Enemy()];
+// Create enemies
+let allEnemies = [new Enemy(), new Enemy(), new Enemy()];
 
-// Create player at start location
-let player = new Player(200, 380);
+// Create new player
+let player = new Player();
 
 // Listen for key presses and and sendit to player's handleInput() method
 document.addEventListener('keyup', function(e) {
