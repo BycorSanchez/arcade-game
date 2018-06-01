@@ -1,96 +1,95 @@
 // Map constrains
+let map = {width: 400, heigth: 380, stepX: 101, stepY: 85};
 let streets = [40, 125, 210];
-let map = { width: 400, heigth: 380, stepX: 101, stepY: 85};
 
 const random = function(from, to){
     return Math.floor(Math.random() * to) + from;
 }
 
-let Enemy = function(x, y) {
-    this.sprite = 'images/enemy-bug.png';
-    this.reset();
-};
-
-Enemy.prototype.reset = function(){
-    this.x = -100;
-    this.y = streets[random(0, 3)];
-    this.speed = random(120, 600);
-};
-
-// Checks whether the enemy collides with the player
-Enemy.prototype.collidePlayer = function(){
-    const xDifference = Math.abs(this.x - player.x);
-    const yDifference = Math.abs(this.y - player.y);
-    return yDifference < 40 && xDifference < 40;
-};
-
-// Update the enemy's position
-// Parameter: dt, a time delta between ticks
-Enemy.prototype.update = function(dt) {
-    this.x += this.speed * dt;
-
-    // Check if collides with a player
-    if (this.collidePlayer()) {
-        player.reset();
-    }
-
-    // Reset to starting position once it disappears
-    if (this.x > map.width + 100){
+class Enemy {
+    constructor() {
+        this.sprite = 'images/enemy-bug.png';
         this.reset();
     }
-};
-
-// Draw the enemy on the screen
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
-
-
-let Player = function(x, y){
-    this.sprite = 'images/char-boy.png';
-    this.reset();
+    reset() {
+        this.x = -100;
+        this.y = streets[random(0, 3)];
+        this.speed = random(120, 600);
+    }
+    // Checks whether the enemy collides with the player
+    collidePlayer() {
+        const xDifference = Math.abs(this.x - player.x);
+        const yDifference = Math.abs(this.y - player.y);
+        return yDifference < 40 && xDifference < 40;
+    }
+    // Update the enemy's position
+    // Parameter: dt, a time delta between ticks
+    update(dt) {
+        this.x += this.speed * dt;
+        // Check if collides with a player
+        if (this.collidePlayer()) {
+            player.reset();
+        }
+        // Reset to starting position once it disappears
+        if (this.x > map.width + 100) {
+            this.reset();
+        }
+    }
+    // Draw the enemy on the screen
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
 }
 
-// Place player at starting position (centered at bottom)
-Player.prototype.reset = function(){
-    this.x = map.width/2;
-    this.y = map.heigth;
-};
 
-Player.prototype.update = function(){
-    // Do not allow user to move beyond map constraints
-    if (this.x < 0) this.x = 0;
-    if (this.y < 0) this.y = 0;
-    if (this.x > map.width) this.x = map.width;
-    if (this.y > map.heigth) this.y = map.heigth;
-};
-
-// Draw player on screen
-Player.prototype.render = function(){
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
-
-// Control player movement
-Player.prototype.handleInput = function(key){
-    switch(key){
-        case 'left':
-            this.x -= map.stepX;
-            break;
-        case 'right':
-            this.x += map.stepX;
-            break;
-        case 'up':
-            this.y -= map.stepY;
-            break;
-        case 'down':
-            this.y += map.stepY;
-            break;
-    }
-    if (this.y <= 0){
-        alert('Congratulations, you\'ve cross the road!!');
+class Player {
+    constructor() {
+        this.sprite = 'images/char-boy.png';
         this.reset();
     }
-};
+
+    // Place player at starting position (centered at bottom)
+    reset() {
+        this.x = map.width / 2;
+        this.y = map.heigth;
+    }
+
+    update() {
+        // Do not allow user to move beyond map constraints
+        if (this.x < 0) this.x = 0;
+        if (this.y < 0) this.y = 0;
+        if (this.x > map.width) this.x = map.width;
+        if (this.y > map.heigth) this.y = map.heigth;
+    }
+
+    // Draw player on screen
+    render() {
+        ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    }
+
+    // Control player movement
+    handleInput(key) {
+        switch (key) {
+            case 'left':
+                this.x -= map.stepX;
+                break;
+            case 'right':
+                this.x += map.stepX;
+                break;
+            case 'up':
+                this.y -= map.stepY;
+                break;
+            case 'down':
+                this.y += map.stepY;
+                break;
+        }
+        if (this.y <= 0) {
+            alert('Congratulations, you\'ve crossed the road!!');
+            this.reset();
+        }
+    }
+}
+
 
 // Create enemies
 let allEnemies = [new Enemy(), new Enemy(), new Enemy()];
