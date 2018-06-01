@@ -7,7 +7,7 @@ class Enemy {
     // Set a random speed and street line
     reset() {
         this.x = -100;
-        this.y = streets[random(0, 3)];
+        this.y = map.streets[random(0, 3)];
         this.speed = random(120, 600);
     }
 
@@ -93,14 +93,10 @@ const random = function(from, to){
 }
 
 // Map constrains
-const map = {width: 400, heigth: 380, stepX: 101, stepY: 85};
-const streets = [40, 125, 210];
+const map = {width: 400, heigth: 380, stepX: 101, stepY: 85, streets: [40, 125, 210] };
 
-
-// Create enemies
+// Create instances (enemies and player)
 const allEnemies = [new Enemy(), new Enemy(), new Enemy()];
-
-// Create new player
 const player = new Player();
 
 // Listen for key presses and and sendit to player's handleInput() method
