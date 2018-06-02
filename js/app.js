@@ -4,7 +4,7 @@ class Enemy {
         this.reset();
     }
 
-    // Set a random speed and street line
+    // Set a random speed and road line
     reset() {
         this.x = -100;
         this.y = map.streets[random(0, 3)];
