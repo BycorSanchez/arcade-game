@@ -126,9 +126,14 @@ const random = (from, to) => Math.floor(Math.random() * to) + from;
 const map = { width: 400, heigth: 380, stepX: 101, stepY: 85, streets: [40, 125, 210] };
 
 // Create instances
-const allEnemies = [new Enemy(), new Enemy(), new Enemy(), new Enemy(), new Enemy()];
+let allEnemies = [];
+const numEnemies = 5;
 const player = new Player();
 const selector = new Selector();
+
+for (let i = 0; i < numEnemies; i++) {
+    allEnemies.push(new Enemy());
+}
 
 // Listen for key presses and and sendit to player's handleInput() method
 document.addEventListener('keyup', (e)  => {
