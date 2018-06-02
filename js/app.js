@@ -74,7 +74,6 @@ class Player {
                 break;
             case 'down':
                 this.y += map.stepY;
-                selector.hide();
                 break;
         }
 
