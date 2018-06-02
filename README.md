@@ -20,4 +20,4 @@ At start the Player is located in the grass. There are several Enemies (bugs) wh
 
 ## Requirements
 
-ES6 (ECMAScript 6) features, such as classes and arrow functions, have been used while developing this game. Therefore a browser which support ES6 is needed in order to run it correctly.
+ES6 ([ECMAScript 6](https://www.ecma-international.org/ecma-262/6.0/)) features, such as classes and arrow functions, have been used while developing this game. Therefore a browser which support ES6 is needed in order to run it correctly.
