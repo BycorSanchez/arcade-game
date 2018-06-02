@@ -46,6 +46,7 @@ class Player {
     reset() {
         this.x = map.width / 2;
         this.y = map.heigth;
+        selector.show();
     }
 
     update() {
@@ -61,15 +62,19 @@ class Player {
         switch (key) {
             case 'left':
                 this.x -= map.stepX;
+                selector.hide();
                 break;
             case 'right':
                 this.x += map.stepX;
+                selector.hide();
                 break;
             case 'up':
                 this.y -= map.stepY;
+                selector.hide();
                 break;
             case 'down':
                 this.y += map.stepY;
+                selector.hide();
                 break;
         }
 
@@ -89,10 +94,19 @@ class Player {
 class Selector {
     constructor() {
         this.sprite = 'images/Selector.png';
-        this.x = map.width / 2;
-        this.y = map.heigth;
         this.currentSprite = 0;
         this.playerSprites = ['images/char-boy.png', 'images/char-cat-girl.png', 'images/char-horn-girl.png', 'images/char-pink-girl.png', 'images/char-princess-girl.png']
+    }
+
+    show() {
+        this.x = map.width / 2;
+        this.y = map.heigth;
+    }
+
+    // Hide selection box off canvas
+    hide() {
+        this.x = map.width / 2;
+        this.y = map.heigth + 400;
     }
 
     // Draw selector box
@@ -128,15 +142,15 @@ const map = { width: 400, heigth: 380, stepX: 101, stepY: 85, streets: [40, 125,
 // Create instances
 let allEnemies = [];
 const numEnemies = 5;
-const player = new Player();
 const selector = new Selector();
+const player = new Player();
 
 for (let i = 0; i < numEnemies; i++) {
     allEnemies.push(new Enemy());
 }
 
 // Listen for key presses and and sendit to player's handleInput() method
-document.addEventListener('keyup', (e)  => {
+document.addEventListener('keyup', (e) => {
     const allowedKeys = {
         32: 'space',
         37: 'left',
