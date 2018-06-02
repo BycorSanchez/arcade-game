@@ -1,6 +1,6 @@
 # Classic Arcade game Project
 
-Classic arcade game project. Live version: [https://bycorsanchez.github.io/arcade-game/](https://bycorsanchez.github.io/arcade-game/)
+Classic arcade game project
 
 ## How to play
 
@@ -17,6 +17,17 @@ At start the Player is located in the grass. There are several Enemies (bugs) wh
 * Enemy-player collision resets the game
 * Congratulations alert when player wins
 * Player selection (pressing space bar key at selection box)
+
+## How to run
+
+### Locally
+
+1. Clone or download[⬇](https://github.com/BycorSanchez/arcade-game/archive/master.zip) the project
+2. Open *`index.html`* file using a browser that meets the necessary [requirements](##requirements)
+
+### Online
+
+Live version [https://bycorsanchez.github.io/arcade-game/](https://bycorsanchez.github.io/arcade-game/)
 
 ## Requirements
 
