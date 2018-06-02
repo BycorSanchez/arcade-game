@@ -8,7 +8,7 @@ class Enemy {
     reset() {
         this.x = -100;
         this.y = map.streets[random(0, 3)];
-        this.speed = random(120, 600);
+        this.speed = random(120, 640);
     }
 
     // Check whether the enemy collides with the player
@@ -120,20 +120,18 @@ class Selector {
 }
 
 // Create a random integer number between 'from' and 'to' numbers
-const random = function (from, to) {
-    return Math.floor(Math.random() * to) + from;
-}
+const random = (from, to) => Math.floor(Math.random() * to) + from;
 
 // Map constrains
 const map = { width: 400, heigth: 380, stepX: 101, stepY: 85, streets: [40, 125, 210] };
 
 // Create instances
-const allEnemies = [new Enemy(), new Enemy(), new Enemy()];
+const allEnemies = [new Enemy(), new Enemy(), new Enemy(), new Enemy(), new Enemy()];
 const player = new Player();
 const selector = new Selector();
 
 // Listen for key presses and and sendit to player's handleInput() method
-document.addEventListener('keyup', function (e) {
+document.addEventListener('keyup', (e)  => {
     const allowedKeys = {
         32: 'space',
         37: 'left',
