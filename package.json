@@ -1,0 +1,23 @@
+{
+  "name": "arcade-game",
+  "version": "1.0.0",
+  "description": "Classic arcade game project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BycorSanchez/classic-arcade-game.git"
+  },
+  "author": "Bycor Sanchez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BycorSanchez/classic-arcade-game/issues"
+  },
+  "homepage": "https://github.com/BycorSanchez/classic-arcade-game#readme",
+  "devDependencies": {
+    "browser-sync": "^2.24.4",
+    "gulp": "^4.0.0"
+  }
+}
