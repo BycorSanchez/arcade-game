@@ -1,6 +1,6 @@
 # Classic Arcade game Project
 
-Classic arcade game project
+Classic arcade game project. This is the fourth required project on the [Udacity Front End Nanodegree](https://eu.udacity.com/course/front-end-web-developer-nanodegree--nd001).
 
 ## How to play
 
