@@ -15,14 +15,14 @@ At start the Player is located in the grass. There are several Enemies (bugs) wh
 * Player can not move off screen
 * Enemies cross the screen
 * Enemy-player collision resets the game
-* Congratulations alert when player wins
-* Player selection (pressing space bar key at selection box)
+* Congratulation alert when player wins
+* Player selection (pressing space bar key on selection box)
 
 ## How to run
 
 ### Locally
 
-1. Clone or download[⬇](https://github.com/BycorSanchez/arcade-game/archive/master.zip) the project
+1. Clone or download [⬇](https://github.com/BycorSanchez/arcade-game/archive/master.zip) the project
 2. Open *`index.html`* file using a browser that meets the necessary [requirements](##requirements)
 
 ### Online
